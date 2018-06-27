@@ -2,7 +2,6 @@ $TEST_BASE= File.dirname(__FILE__)
 require $TEST_BASE+'/../driver/Driver.rb'
 require 'capybara'
 require 'capybara/dsl'
-require 'test_helper.rb'
 require 'TestHelper.rb'
 @driver=Driver.instance
 @driver.navigateTo("","")
@@ -108,5 +107,5 @@ RSpec.configure do |config|
 =end
   config.include Capybara::DSL
   config.include TestHelper
-  config.treat_symbols_as_metadata_keys_with_true_values = true
+#  config.treat_symbols_as_metadata_keys_with_true_values = true
 end

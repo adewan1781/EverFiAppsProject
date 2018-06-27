@@ -51,6 +51,6 @@ describe "verify tabs in Everfi admin portal",:verifytabs do
   
   after(:all) do
     TestHelper.logoutProcess()
-    $session.should have_content("Administrator Log In")
+    expect($session).to have_content("Administrator Log In")
   end
 end
