@@ -1,0 +1,59 @@
+Installation process of Rspec & capybara
+_________________________________________
+check version of ruby preinstalled
+Install brew
+Install ruby with brew install ruby
+
+=> gem install bundler			#needed to maintain all gems of project in gemfile.lock
+
+=> Install ruby DLTK plugin in eclipse to enable ruby perspective
+
+=> gem install rspec
+
+=> create project folder and do (rspec --init) in terminal from project directory and it will create spec_helper file.
+
+
+=> gem install capybara -v 2.7.1 
+
+=> gem install watir-webdriver --no-ri --no-rdoc
+
+=> running rspec tests from eclipse
+select Run => External Tools => External Tools Configurations
+for Name
+enter RSpec Test
+for Location:
+browse file system for rpec in the bin folder (/usr/local/bin/rspec on mac)
+for Working Directory:
+browse file system for spec folder ${workspace_loc:/RSpecStart}  --project name)
+Argument - spec --format documentation  (rspec arguments here)
+push Apply
+========
+push Run at on bottom of this or 
+run as external command "RSpec Test"
+
+RAKE task
+-----------
+$ gem install rake-rspec
+with this rake 10.5.0 is automattically installed
+remove all other rake versions 
+try
+ gem cleanup <gemname>
+ gem uninstall <gemname> --version
+ 
+ => running rake tasks from eclipse
+select Run => External Tools => External Tools Configurations
+for Name
+enter Rake task
+for Location:
+browse file system for rpec in the bin folder (/usr/local/bin/rake on mac)
+for Working Directory:
+browse file system for spec folder ${workspace_loc:/RSpecStart}  --project name)
+Argument - spec --format documentation  (rspec arguments here)
+push Apply
+========
+push Run at on bottom of this or 
+run as external command "Rake Task"
+ 
+ path of gem 
+ _-----------
+ gem which gemname

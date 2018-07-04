@@ -9,6 +9,7 @@
   #Declaration of singleton Driver class
 class Driver
 
+#  $worldMap = nil
   @@inst = nil
   $session = nil
   def self.instance   # Self is a reference to the current object instance.
@@ -29,7 +30,7 @@ class Driver
      Capybara.register_driver :selenium do |app|
            Capybara::Selenium::Driver.new(app, :browser => :chrome)
         end
-     
+#         $worldMap = Hash.new
         $session = Capybara::Session.new(:selenium)
      $session.visit 'https://staging-bbva.everfiapps-dev.net/cportal/ccdee586/login'
    end
