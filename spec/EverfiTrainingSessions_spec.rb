@@ -115,7 +115,7 @@ describe "verify training list on Training Sessions tab",:trlist do
   it"user verifies Attendees tab with Attendees count is displayed" do
     expect($session).to have_xpath("//a[@href='#attendees'][@data-toggle='tab']")
     @@attendeesCountValue =  $session.find(:xpath, "//a[@href='#attendees'][@data-toggle='tab']/span").text
-    puts "aaaaaaaaaaa   "+ @@attendeesCountValue
+#    puts "aaaaaaaaaaa   "+ @@attendeesCountValue
     expect(TestHelper.is_numeric(@@attendeesCountValue)).to be true
   end
 
@@ -135,7 +135,7 @@ describe "verify training list on Training Sessions tab",:trlist do
    
  end
  
- it "user navigates to session management page" do 
+ it "user navigates to training session management page" do 
    $session.find(:xpath, "//div[@class='breadcrumbs']/a[contains(text(),'"+@@codeValue+"')]").click()
    expect($session).to have_xpath("//a[@href='#volunteers'][@data-toggle='tab']")
    expect($session).to have_xpath("//a[@href='#attendees'][@data-toggle='tab']")
