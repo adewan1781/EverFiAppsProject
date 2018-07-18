@@ -32,5 +32,13 @@ end
 RSpec::Core::RakeTask.new(:volunteertab) do |t|
   t.rspec_opts = "--tag volunteertab --format html --out results.html"
 end
-task :default  => :volunteertab
+
+RSpec::Core::RakeTask.new(:organizationtab) do |t|
+  t.rspec_opts = "--tag organizationtab --format html --out results.html"
+end
+
+RSpec::Core::RakeTask.new(:allspecs) do |t|
+  t.rspec_opts = "--format html --out results.html"
+end
+task :default  => :assessments
 #task :spec

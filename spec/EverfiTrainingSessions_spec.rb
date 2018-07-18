@@ -72,6 +72,7 @@ describe "verify training list on Training Sessions tab",:trlist do
     $session.find(:css, "span[id=\"select2-volunteer_session_volunteer_id-container\"]").click()
     $session.find(:css, "input[class=\"select2-search__field\"]").send_keys "Robert\n"
     $session.find(:css, "input[value=\"Add volunteer\"]").click()
+    sleep 1
     countValue = $session.find(:xpath, "//a[@href='#volunteers'][@data-toggle='tab']/span").text
     expect(Integer(countValue)).to eql(Integer(@@volunteerCountValue)+1)
     @@volunteerCountValue = countValue

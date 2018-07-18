@@ -28,7 +28,7 @@ describe "verify assessments to attendee in Everfi admin portal",:assessments do
   it"user verifies Attendees tab with Attendees count is displayed" do
     expect($session).to have_xpath("//a[@href='#attendees'][@data-toggle='tab']")
     $attendeesCountValue =  $session.find(:xpath, "//a[@href='#attendees'][@data-toggle='tab']/span").text
-    puts "aaaaaaaaaaa   "+ $attendeesCountValue
+#    puts "aaaaaaaaaaa   "+ $attendeesCountValue
     expect(TestHelper.is_numeric($attendeesCountValue)).to be true
   end
 

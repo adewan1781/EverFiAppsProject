@@ -1,8 +1,11 @@
 Installation process of Rspec & capybara
 _________________________________________
-check version of ruby preinstalled
-Install brew
-Install ruby with brew install ruby
+check version of ruby preinstalled (ruby -v)
+
+Install brew 
+
+Install ruby with - brew install ruby
+(new ruby version gets installed into /usr/local/bin/ruby
 
 => gem install bundler			#needed to maintain all gems of project in gemfile.lock
 
@@ -57,3 +60,6 @@ run as external command "Rake Task"
  path of gem 
  _-----------
  gem which gemname
+ 
+ gmail credentials
+ everfi.flive@gmail.com / testing@123
