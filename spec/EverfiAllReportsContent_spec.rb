@@ -1,3 +1,5 @@
+require $TEST_BASE+'/../pages/EverfiPageCommon.rb'
+  
 require 'rspec'
 require 'spec_helper.rb'
 require 'benchmark'

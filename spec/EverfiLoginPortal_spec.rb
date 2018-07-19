@@ -1,39 +1,38 @@
 require 'rspec'
 require 'spec_helper.rb'
-
+require $TEST_BASE+'/../pages/EverfiLoginPage.rb'
+require $TEST_BASE+'/../pages/EverfiPageCommon.rb'
+require $TEST_BASE+'/../pages/EverfiCommonTabs.rb'
 
 describe "successfully login into customer admin portal",:login do
-  
-      it "allows to select language as spanish" do
-        $session.find(:css, "div[id*=\"targetLanguage\"]").click()
-        $session.within_frame 0 do
-          expect($session).to have_content("Spanish")
-          $session.find(:css, "a[class=\"goog-te-menu2-item\"]").click()
-        end
-        expect($session).to have_content("Administrador de sesión")
-        $session.find(:css, "div[id*=\"targetLanguage\"]").click()
-        $session.within_frame 1 do
-          expect($session).to have_content("English ")
-          $session.find(:css, "a[class=\"goog-te-menu2-item\"]").click()
-        end
-        expect($session).to have_content("Administrator Log In")
-      end
-  
-      it "allows user to change password" do
-        $session.find(:xpath, "//div[@class='forgot-password-form-link']/a").click()
-        expect($session).to have_content("Forgot your password?")
-        $session.evaluate_script('window.history.back()')
-    
-      end
-      
-      it"allows to enter username and password" do
-        TestHelper.loginProcess()
-        $session.find(:css, "a[href=\"/cportal/ccdee586\"]").click()
-        sleep 2
-      end
-      
-  after(:all) do
-      TestHelper.logoutProcess()
+
+  before(:all) do
+    @loginPage = EverfiLoginPage.new($session)
+    @common = EverfiPageCommon.new($session)
+    @tabs = EverfiCommonTabs.new($session)
+  end
+
+  it "allows to select language as spanish" do
+    @loginPage.selectLanguage("Spanish")
+    expect($session).to have_content("Administrador de sesión")
+    @loginPage.selectLanguage("English ")
     expect($session).to have_content("Administrator Log In")
-    end
-    end
+  end
+
+  it "allows user to change password" do
+    @loginPage.clickForgotPasswordLink()
+    expect($session).to have_content("Forgot your password?")
+    @common.windowBack()
+
+  end
+
+  it"allows to enter username and password" do
+    @common.loginProcess()
+    @tabs.clickHomeTab()
+  end
+
+  after(:all) do
+    @common.logoutProcess()
+    expect($session).to have_content("Administrator Log In")
+  end
+end

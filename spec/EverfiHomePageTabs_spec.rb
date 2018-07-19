@@ -1,35 +1,35 @@
 require 'rspec'
 require 'spec_helper.rb'
-
-
+require $TEST_BASE+'/../pages/EverfiPageCommon.rb'
+require $TEST_BASE+'/../pages/EverfiCommonTabs.rb'
+require $TEST_BASE+'/../pages/EverfiHomePage.rb'
 
 describe "verify tabs in Everfi Home Page",:hometabs do
   before(:all) do
-    TestHelper.loginProcess()
+    @common = EverfiPageCommon.new($session)
+    @tabs = EverfiCommonTabs.new($session)
+    @home = EverfiHomePage.new($session)
+    @common.loginProcess()
   end
-  
+
   it "user navigates to Home page" do
-    $session.find(:css, "a[href=\"/cportal/ccdee586\"]").click()
-    expect($session).to have_xpath("//a[contains(text(),'New Session')]")
+    @tabs.clickHomeTab()
+    expect($session).to have_xpath(@home.homePageXpath())
   end
-  
+
   it "user verifies Upcoming Sessions Tab" do
-    element = $session.find(:css, "a[href=\"#upcoming-sessions\"]")
-    element.click()
-    title = element.text
+    title = @home.clickAndGetUpcomingSessionsText()
     expect(title).to include("Upcoming Sessions")
-    
+
   end
-  
+
   it "user verifies Past Sessions Tab" do
-    element = $session.find(:css, "a[href=\"#past-sessions\"]")
-    element.click()
-    title = element.text
+    title = @home.clickAndGetPastSessionsText()
     expect(title).to include("Past Sessions")
   end
-    
+
   after(:all) do
-      TestHelper.logoutProcess()
+    @common.logoutProcess()
     expect($session).to have_content("Administrator Log In")
-    end
+  end
 end

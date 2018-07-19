@@ -1,51 +1,56 @@
 require 'rspec'
 require 'spec_helper.rb'
-
+require $TEST_BASE+'/../pages/EverfiPageCommon.rb'
+require $TEST_BASE+'/../pages/EverfiCommonTabs.rb'
+require $TEST_BASE+'/../pages/EverfiHomePage.rb'
+require $TEST_BASE+'/../pages/VolunteerLoginPage.rb'
 
 describe "verify volunteers portal on home page",:volunteersHome do
-  
+
   before(:all) do
-    TestHelper.loginProcess()
+    @common = EverfiPageCommon.new($session)
+    @tabs = EverfiCommonTabs.new($session)
+    @home = EverfiHomePage.new($session)
+    @volLogin = VolunteerLoginPage.new($session)
+    @common.loginProcess()
   end
-  
+
   it "user navigates to Home page" do
-     $session.find(:css, "a[href=\"/cportal/ccdee586\"]").click()
-     expect($session).to have_xpath("//a[contains(text(),'New Session')]")
-   end
-   
-   it "user clicks on Volunteer Portal" do
-     expect($session).to have_xpath("//a[text()='volunteer portal']")
-     $session.find(:xpath, "//a[text()='volunteer portal']").click()
-   end
-   
-   it "Volunteer portal login page should be displayed" do
-     pageTitle =$session.title
-     expect("FiLive | Volunteer Log in").to eq(pageTitle)
-     expect($session).to have_xpath("//input[@id='volunteer_email']") 
-   end
-   
-  it "user navigates back to Home page" do
-    $session.evaluate_script('window.history.back()')
+    @tabs.clickHomeTab()
+    expect($session).to have_xpath(@home.homePageXpath())
   end
-   
-  it "user clicks on Volunteer Portal session wizard" do
-    expect($session).to have_xpath("//a[text()='volunteer portal session wizard']")
-    $session.find(:xpath, "//a[text()='volunteer portal session wizard']").click()
-  end 
-    
+
+  it "user clicks on Volunteer Portal" do
+    @home.clickVolunteerPortalLink()
+  end
+
   it "Volunteer portal login page should be displayed" do
-    pageTitle =$session.title
+    pageTitle = @volLogin.getPageTitle()
     expect("FiLive | Volunteer Log in").to eq(pageTitle)
-    expect($session).to have_xpath("//input[@id='volunteer_email']")
+    expect($session).to have_xpath(@volLogin.emailFieldXpath())
   end
-   
+
   it "user navigates back to Home page" do
-      $session.evaluate_script('window.history.back()')
+    @common.windowBack()
   end
-   
+
+  it "user clicks on Volunteer Portal session wizard" do
+    @home.clickVolunteerSessionWizardLink()
+  end
+
+  it "Volunteer portal login page should be displayed" do
+    pageTitle = @volLogin.getPageTitle()
+    expect("FiLive | Volunteer Log in").to eq(pageTitle)
+    expect($session).to have_xpath(@volLogin.emailFieldXpath())
+  end
+
+  it "user navigates back to Home page" do
+    @common.windowBack()
+  end
+
   after(:all) do
-    TestHelper.logoutProcess()
+    @common.logoutProcess()
     expect($session).to have_content("Administrator Log In")
   end
-  
+
 end
