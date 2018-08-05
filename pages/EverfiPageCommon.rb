@@ -20,15 +20,25 @@ class EverfiPageCommon
   def windowBack()
     @session.evaluate_script('window.history.back()')
   end
-  
+
   def findPageHeaderText()
-     pageHeading = @session.find(:css, "div[class*=\"page-heading\"]").text
-     pageHeading
-   end
-   
+    pageHeading = @session.find(:css, "div[class*=\"page-heading\"]").text
+    pageHeading
+  end
+
   def productListCss()
     productListCSS = "div[class=\"project-list\"]"
     productListCSS
-    end
+  end
+
+  def deleteProcess()
+    @session.find(:xpath, "//a[@data-method='delete'][text()='Delete']").click()
+    @session.driver.browser.switch_to.alert.accept
+  end
+
+  def messageDialogXpath(text)
+    msgDialogXpath = "//div[@role='alertdialog'][text()='"+text+"']"
+    msgDialogXpath
+  end
 
 end

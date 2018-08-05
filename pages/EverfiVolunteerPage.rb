@@ -60,9 +60,6 @@ class EverfiVolunteerPage
     title = element.text
   end
 
-  def deleteProcess()
-    @session.find(:xpath, "//a[@data-method='delete'][text()='Delete']").click()
-    @session.driver.browser.switch_to.alert.accept
-  end
+ 
 
 end

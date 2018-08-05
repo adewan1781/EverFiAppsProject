@@ -40,5 +40,5 @@ end
 RSpec::Core::RakeTask.new(:allspecs) do |t|
   t.rspec_opts = "--format html --out results.html"
 end
-task :default  => :trlist
+task :default  => :assessments
 #task :spec

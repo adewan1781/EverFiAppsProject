@@ -69,8 +69,8 @@ describe "verify volunteer tab in Everfi admin portal",:volunteertab do
   end
 
   it "user deletes the created volunteer" do
-    @volunteer.deleteProcess()
-    expect($session).to have_xpath("//div[@role='alertdialog'][text()='Volunteer removed.']")
+    @common.deleteProcess()
+    expect($session).to have_xpath(@common.messageDialogXpath("Volunteer removed."))
   end
 
   after(:all) do

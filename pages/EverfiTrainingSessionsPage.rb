@@ -42,7 +42,6 @@ class EverfiTrainingSessionsPage
 
   def clickVolunteerCount(codeValue)
     @session.find(:xpath, "//tr[.//a[text()='"+codeValue+"']]/td[4]/a").click()
-
   end
 
   def volunteerTabXpath()
@@ -99,8 +98,6 @@ class EverfiTrainingSessionsPage
     @session.fill_in('attendee_contact_email', :with => "abc@attendee"+@util.generate_Random_number()+".com")
     @session.select '$0 - $10,000', from: 'attendee_income_level'
     @session.find(:css, "input[value=\"Create Attendee\"]").click()
-    msgDialogXpath = "//div[@role='alertdialog'][text()='Attendee added.']"
-    msgDialogXpath
   end
 
   def navigateBackToSessionManage(codeValue)
@@ -114,11 +111,6 @@ class EverfiTrainingSessionsPage
     @session.find(:css, "input[value=\"Update Attendee\"]").click()
   end
 
-  def attendeeUpdatedDialogXpath()
-    msgDialogXpath = "//div[@role='alertdialog'][text()='Attendee updated.']"
-    msgDialogXpath
-  end
-
   def updateAttendeeTrainingSession()
     @session.find(:xpath, "//a[@href='#attendees'][@data-toggle='tab']").click()
     @session.find(:xpath, "//div[@id='attendees']//a[contains(@href,'edit')]").click()
@@ -130,6 +122,20 @@ class EverfiTrainingSessionsPage
   def verifyTrainingSessionXPath(codeValue)
     trainingSessionXpath = "//div[@class='breadcrumbs']/a[contains(text(),'"+codeValue+"')]"
     trainingSessionXpath
+  end
+
+  def clickTrainingSessionEdit()
+    @session.find(:xpath, "//table[contains(@class,'table-crud')]//a[contains(@href,'edit')]").click()
+  end
+
+  def editAndSaveTrainingSession()
+    @session.find(:css, "input[id=\"training_session_street\"]").send_keys "silicon valley123"
+    @session.find(:css, "input[id=\"training_session_city\"]").send_keys "california123"
+    @session.find(:css, "input[value=\"Update Training session\"]").click()
+  end
+  
+  def clickManageAssessmentsButton()
+    @session.find(:css, "a[href*=\"/assessments\"]").click()
   end
 
 end
