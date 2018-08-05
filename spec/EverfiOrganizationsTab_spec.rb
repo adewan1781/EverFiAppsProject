@@ -1,14 +1,24 @@
 require 'rspec'
 require 'spec_helper.rb'
+require 'rspec'
+require 'spec_helper.rb'
+require $TEST_BASE+'/../pages/EverfiPageCommon.rb'
+require $TEST_BASE+'/../pages/EverfiCommonTabs.rb'
+
+#require $TEST_BASE+'/../pages/EverfiTrainingSessionsPage.rb'
 
 describe "verify Organization tab in Everfi admin portal",:organizationtab do
   before(:all) do
-    TestHelper.loginProcess()
+    @common = EverfiPageCommon.new($session)
+    @tabs = EverfiCommonTabs.new($session)
+    #    @trainingPage = EverfiTrainingSessionsPage.new($session)
+    #    @util = FrameworkUtilities.new()
+    @common.loginProcess()
   end
 
   it "user navigates to Organizations Tab" do
-    $session.find(:xpath, "//a[contains(@href,'/ccdee586/volunteers?organization=true')]").click()
-    pageHeading = $session.find(:css, "div[class*=\"page-heading\"]").text
+    @tabs.clickOrganizationsTab()
+    pageHeading = @common.findPageHeaderText()
     expect(pageHeading).to include("Organizations")
   end
 
@@ -86,9 +96,9 @@ describe "verify Organization tab in Everfi admin portal",:organizationtab do
     $session.visit 'https://staging-bbva.everfiapps-dev.net/cportal/ccdee586'
   end
 
-    after(:all) do
-      TestHelper.logoutProcess()
-      expect($session).to have_content("Administrator Log In")
-    end
+  after(:all) do
+    @common.logoutProcess()
+    expect($session).to have_content("Administrator Log In")
+  end
 
 end
