@@ -21,7 +21,7 @@ class EverfiCommonTabs
   end
   
   def clickVolunteersTab()
-    $session.find(:xpath, "//a[@href='/cportal/ccdee586/volunteers']").click()
+    $session.find(:xpath, "//ul[@id='side-menu']//a[@href='/cportal/ccdee586/volunteers']").click()
   end
   
   def clickOrganizationsTab()

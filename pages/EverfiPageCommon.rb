@@ -25,5 +25,10 @@ class EverfiPageCommon
      pageHeading = @session.find(:css, "div[class*=\"page-heading\"]").text
      pageHeading
    end
+   
+  def productListCss()
+    productListCSS = "div[class=\"project-list\"]"
+    productListCSS
+    end
 
 end
